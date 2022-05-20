@@ -1,0 +1,9 @@
+@import '~bootstrap/scss/bootstrap';
+
+.auth-loader-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
