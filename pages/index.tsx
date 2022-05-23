@@ -1,4 +1,5 @@
 import { Container } from 'react-bootstrap';
+import Link from 'next/link';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0';
@@ -14,7 +15,7 @@ const Home: NextPage = () => {
   return (
     <Container>
       <h3>
-        login <a href="/api/auth/login">here</a>
+        login <Link href="/api/auth/login">here</Link>
       </h3>
     </Container>
   );
