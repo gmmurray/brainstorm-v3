@@ -11,7 +11,7 @@ const templateQueries = {
     const limit = args.limit as number | undefined;
 
     const query = TemplateModel.find({ userId });
-    console.log(limit);
+
     if (limit) {
       query.limit(limit);
     }

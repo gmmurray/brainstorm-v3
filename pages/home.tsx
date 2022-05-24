@@ -1,55 +1,116 @@
-import { ApolloClient, InMemoryCache, gql, useMutation } from '@apollo/client';
-import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { ArrowRightShort, Plus } from 'react-bootstrap-icons';
+import { Button, Col, Row } from 'react-bootstrap';
 
+import FrontPageItems from '../lib/components/FrontPageItems';
+import { GET_IDEAS_QUERY } from '../apollo/ideas/queries';
+import { GET_LIMITED_TEMPLATES_QUERY } from '../apollo/templates/queries';
+import { Idea } from '../lib/types/Idea';
 import Link from 'next/link';
 import { NextPage } from 'next';
+import { Template } from '../lib/types/Template';
 import { useEffect } from 'react';
+import { useQuery } from '@apollo/client';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 const Home: NextPage = () => {
-  const { user } = useUser();
-  //const [createTemplate, { data, loading, error }] = useMutation(gql`createTemplate(template: TemplateCreateInput!): Template!`)
   useEffect(() => {
-    const client = new ApolloClient({
-      uri: 'http://localhost:3000/api/graphql',
-      cache: new InMemoryCache(),
-    });
-
-    const template = {
-      name: 'updatededed',
-      fields: [],
-    };
-    // client
-    //   .mutate({
-    //     mutation: gql`
-    //       mutation UpdateTemplate(
-    //         $updateTemplateId: ID!
-    //         $template: TemplateUpdateInput!
-    //       ) {
-    //         updateTemplate(id: $updateTemplateId, template: $template) {
-    //           name
-    //           id
-    //         }
-    //       }
-    //     `,
-    //     variables: { updateTemplateId: '628b099ac1e9c7cf7b8491dd', template },
-    //   })
-    //   .then(res => console.log(res));
-    client
-      .mutate({
-        mutation: gql`
-          mutation UpdateTemplate($deleteTemplateId: ID!) {
-            deleteTemplate(id: $deleteTemplateId)
-          }
-        `,
-        variables: { deleteTemplateId: '628b099ac1e9c7cf7b8491dd' },
-      })
-      .then(res => console.log(res));
+    if (typeof document !== 'undefined') {
+      document.title = 'home';
+    }
   }, []);
+
+  const {
+    loading: templatesLoading,
+    error: templatesError,
+    data: templatesData,
+  } = useQuery(GET_LIMITED_TEMPLATES_QUERY, { variables: { limit: 3 } });
+  const {
+    loading: ideasLoading,
+    error: ideasError,
+    data: ideasData,
+  } = useQuery(GET_IDEAS_QUERY, { variables: { limit: 3 } });
+
+  const ideas = ideasData?.ideas ?? ([] as Idea[]);
+  const templates = templatesData?.templates ?? ([] as Template[]);
+
   return (
     <div>
       <h1 className="display-1">home</h1>
-      <p>{user!.sub}</p>
-      <Link href="/api/auth/logout">logout</Link>
+      <Row>
+        <Col xs={12}>
+          <h5 className="display-5">ideas</h5>
+        </Col>
+        <Col xs={12}>
+          <FrontPageItems
+            items={ideas}
+            loading={ideasLoading}
+            error={ideasError}
+            itemsName="ideas"
+          />
+        </Col>
+        <Col xs={12} className="mt-3">
+          <Link
+            className={`btn btn-primary${ideasLoading ? ' disabled' : ''}`}
+            href="/ideas"
+            passHref
+          >
+            <Button color="primary">
+              view all <ArrowRightShort />
+            </Button>
+          </Link>
+          {!ideasLoading && ideas.length === 0 && (
+            <Link
+              className={`btn btn-primary ms-2${
+                ideasLoading ? ' disabled' : ''
+              }`}
+              href="/ideas/create"
+              passHref
+            >
+              <Button color="primary" className="ms-2">
+                create one <Plus />
+              </Button>
+            </Link>
+          )}
+        </Col>
+      </Row>
+      <hr />
+      <Row>
+        <Col xs={12}>
+          <h5 className="display-5">templates</h5>
+        </Col>
+        <Col xs={12}>
+          <FrontPageItems
+            items={templates}
+            loading={templatesLoading}
+            error={templatesError}
+            itemsName="templates"
+          />
+        </Col>
+        <Col xs={12} className="mt-3">
+          <Link
+            className={`btn btn-primary${templatesLoading ? ' disabled' : ''}`}
+            href="/templates"
+            passHref
+          >
+            <Button color="primary">
+              view all <ArrowRightShort />
+            </Button>
+          </Link>
+          {!templatesLoading && templates.length === 0 && (
+            <Link
+              className={`btn btn-primary ms-2${
+                templatesLoading ? ' disabled' : ''
+              }`}
+              href="/templates/create"
+              passHref
+            >
+              <Button color="primary" className="ms-2">
+                create one <Plus />
+              </Button>
+            </Link>
+          )}
+        </Col>
+      </Row>
     </div>
   );
 };
