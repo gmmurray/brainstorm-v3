@@ -30,8 +30,8 @@ const Home: NextPage = () => {
     data: ideasData,
   } = useQuery(GET_IDEAS_QUERY, { variables: { limit: 3 } });
 
-  const ideas = ideasData?.ideas ?? ([] as Idea[]);
-  const templates = templatesData?.templates ?? ([] as Template[]);
+  const ideas = (ideasData?.ideas as Idea[]) ?? [];
+  const templates = (templatesData?.templates as Template[]) ?? [];
 
   return (
     <div>
@@ -84,6 +84,7 @@ const Home: NextPage = () => {
             loading={templatesLoading}
             error={templatesError}
             itemsName="templates"
+            isTemplate
           />
         </Col>
         <Col xs={12} className="mt-3">

@@ -1,6 +1,6 @@
 const types = /* GraphQL */ `
   enum TemplateFieldType {
-    TEXT
+    STRING
     NUMBER
     BOOLEAN
   }

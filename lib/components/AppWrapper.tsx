@@ -9,7 +9,7 @@ const AppWrapper: FunctionComponentWithProps = ({ children }) => {
 
   if (isLoading) {
     return (
-      <Container className="auth-loader-container">
+      <Container className="full-screen-spinner-container">
         <Spinner animation="border" />
       </Container>
     );

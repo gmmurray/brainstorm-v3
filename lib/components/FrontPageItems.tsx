@@ -2,9 +2,9 @@ import { Col, Row } from 'react-bootstrap';
 
 import { ApolloError } from '@apollo/client';
 import CardPlaceholders from './CardPlaceholders';
-import FrontPageItem from './FrontPageItem';
 import { FunctionComponentWithProps } from '../types/FunctionComponentWithProps';
 import { Idea } from '../types/Idea';
+import ListItem from './ListItem';
 import React from 'react';
 import { Template } from '../types/Template';
 
@@ -51,7 +51,7 @@ const FrontPageItems: FunctionComponentWithProps<FrontPageItemsProps> = ({
     <Row xs={12} md={3}>
       {items.map((item, index) => (
         <Col key={index}>
-          <FrontPageItem item={item} isTemplate={!!isTemplate} />
+          <ListItem item={item} isTemplate={!!isTemplate} />
         </Col>
       ))}
     </Row>

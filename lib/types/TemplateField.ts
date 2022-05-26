@@ -1,7 +1,7 @@
 export enum TemplateFieldTypes {
-  STRING = 'string',
-  BOOLEAN = 'boolean',
-  NUMBER = 'number',
+  STRING = 'STRING',
+  BOOLEAN = 'BOOLEAN',
+  NUMBER = 'NUMBER',
 }
 
 export interface ITemplateField {

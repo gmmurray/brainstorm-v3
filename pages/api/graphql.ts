@@ -43,6 +43,4 @@ export const config = {
   },
 };
 
-export default process.env.NODE_ENV === 'development'
-  ? handler
-  : withApiAuthRequired(handler);
+export default withApiAuthRequired(handler);
