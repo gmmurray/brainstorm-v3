@@ -25,6 +25,8 @@ const authLink = onError(({ networkError }) => {
   }
 });
 export const apolloClient = new ApolloClient({
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    addTypename: false,
+  }),
   link: authLink.concat(httpLink),
 });

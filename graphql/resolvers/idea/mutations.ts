@@ -1,20 +1,26 @@
+import { IIdeaMongo, Idea } from '../../../lib/types/Idea';
+
 import { BackendUser } from '../../../lib/types/BackendUser';
-import { Idea } from '../../../lib/types/Idea';
 import { IdeaModel } from '../../../mongoose/IdeaModel';
+import { Template } from '../../../lib/types/Template';
 import { dbConnect } from '../../../mongoose/db';
 
 const ideaMutations = {
   createIdea: async (_: any, args: any, context: any) => {
     await dbConnect();
     const userId = (context.user as BackendUser).sub;
-    const idea = args.template as Partial<Idea>;
+    const idea = args.idea as Partial<Idea>;
 
     const newIdea = await IdeaModel.create({
-      ...idea,
       userId,
+      name: idea.name,
+      template: (idea.template as Template).id,
+      fields: idea.fields,
     });
 
-    return (await IdeaModel.findById(userId, newIdea.id)) as Idea;
+    const created = await IdeaModel.findById(newIdea.id).populate('template');
+
+    return new Idea(created);
   },
   updateIdea: async (_: any, args: any, context: any) => {
     await dbConnect();

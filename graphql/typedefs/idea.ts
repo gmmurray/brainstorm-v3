@@ -30,7 +30,7 @@ const types = /* GraphQL */ `
   input IdeaCreateInput {
     userId: String!
     name: String!
-    template: String!
+    template: IdeaCreateTemplateInput!
     fields: [IdeaFieldInput]
   }
 

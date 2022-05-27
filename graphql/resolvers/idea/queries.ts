@@ -17,6 +17,7 @@ const ideaQueries = {
     }
 
     const ideas = await query.populate('template').lean<IIdeaMongo[]>();
+
     return ideas.map(i => new Idea(i));
   },
   idea: async (_: any, args: any, context: any) => {
