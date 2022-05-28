@@ -33,7 +33,7 @@ const FrontPageItems: FunctionComponentWithProps<FrontPageItemsProps> = ({
 
   if (loading) {
     return (
-      <Row xs={12} md={3}>
+      <Row xs={1} md={3} className="g-4">
         <CardPlaceholders count={3} />
       </Row>
     );
@@ -48,7 +48,7 @@ const FrontPageItems: FunctionComponentWithProps<FrontPageItemsProps> = ({
   }
 
   return (
-    <Row xs={12} md={3}>
+    <Row xs={1} md={3} className="g-4">
       {items.map((item, index) => (
         <Col key={index}>
           <ListItem item={item} isTemplate={!!isTemplate} />

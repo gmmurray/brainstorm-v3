@@ -87,7 +87,7 @@ const CreateTemplate = () => {
 
   return (
     <>
-      <div>
+      <div className="mb-3">
         <h1 className="display-1">create template</h1>
         <Link href="/templates" passHref>
           <Button variant="outline-primary">back to templates</Button>

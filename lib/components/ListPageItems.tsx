@@ -51,7 +51,7 @@ const ListPageItems: FunctionComponentWithProps<ListPageItemsProps> = ({
 
   if (itemsLoading) {
     return (
-      <Row xs={12} md={3}>
+      <Row xs={1} md={3} className="g-4">
         <CardPlaceholders count={6} />
       </Row>
     );
@@ -68,7 +68,7 @@ const ListPageItems: FunctionComponentWithProps<ListPageItemsProps> = ({
   }
 
   return (
-    <Row xs={12} md={3} className="mt-2 g-4">
+    <Row xs={1} md={3} className="mt-2 g-4">
       {items.map((item, key) => (
         <Col key={key}>
           <ListItem

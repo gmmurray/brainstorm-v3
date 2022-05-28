@@ -61,11 +61,11 @@ const ViewIdeas = () => {
   );
 
   return (
-    <div>
+    <div className="mb-3">
       <h1 className="display-1">ideas</h1>
       <p className="fs-6 text-muted">{getIdeasArray(getData).length} idea(s)</p>
       <Row>
-        <Col xs={12} md="auto">
+        <Col xs={12} md="auto" className="mb-3 mb-md-0">
           <Link href="/ideas/create" passHref>
             <Button variant="primary">new idea</Button>
           </Link>

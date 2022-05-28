@@ -66,13 +66,13 @@ const Templates = () => {
   );
 
   return (
-    <div>
+    <div className="mb-3">
       <h1 className="display-1">templates</h1>
       <p className="fs-6 text-muted">
         {getTemplateArray(getData).length} template(s)
       </p>
       <Row>
-        <Col xs={12} md="auto">
+        <Col xs={12} md="auto" className="mb-3 mb-md-0">
           <Link href="/templates/create" passHref>
             <Button variant="primary">new template</Button>
           </Link>

@@ -87,7 +87,7 @@ const Home: NextPage = () => {
             isTemplate
           />
         </Col>
-        <Col xs={12} className="mt-3">
+        <Col xs={12} className="my-3">
           <Link
             className={`btn btn-primary${templatesLoading ? ' disabled' : ''}`}
             href="/templates"

@@ -232,7 +232,7 @@ const ViewIdea = () => {
   };
 
   return (
-    <div>
+    <div className="mb-3">
       <h1 className="display-1">update idea</h1>
       <Link href="/ideas" passHref>
         <Button variant="outline-primary">back to ideas</Button>
