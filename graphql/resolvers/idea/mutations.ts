@@ -30,10 +30,11 @@ const ideaMutations = {
 
     await IdeaModel.findOneAndReplace(
       { $and: [{ _id: ideaId }, { userId }] },
-      idea,
+      { ...idea, template: (idea.template as Template)?.id },
     );
 
-    const result = await IdeaModel.findById(ideaId);
+    const result = await IdeaModel.findById(ideaId).populate('template');
+    console.log(result);
 
     return new Idea(result);
   },

@@ -115,7 +115,7 @@ const ViewTemplate = () => {
       });
 
       if (updated.errors || !updated?.data.updateTemplate) {
-        setSubmitMessage('error creating template');
+        setSubmitMessage('error updating template');
       } else {
         getTemplate();
       }
